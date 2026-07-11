@@ -1,1458 +1,721 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Medhavi Pande's work samples portfolio - Data Engineering, Analytics Engineering, and Machine Learning projects">
-    <meta property="og:title" content="Medhavi Pande - Work Samples Portfolio">
-    <meta property="og:description" content="Selected projects across analytics engineering, data pipelines, and applied machine learning">
-    <meta property="og:type" content="website">
-    <title>Medhavi Uday Pande</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #f5f6f7;
-            --bg-white: #ffffff;
-            --text-primary: #1c1e21;
-            --text-secondary: #65676b;
-            --border-color: #e6e8eb;
-            --accent-blue: #0081fb;
-            --accent-blue-hover: #0066cc;
-            --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-            --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            animation: fadeIn 0.8s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-15px) rotate(2deg); }
-            50% { transform: translateY(-20px) rotate(0deg); }
-            75% { transform: translateY(-15px) rotate(-2deg); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .fade-in {
-            animation: slideUp 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        .fade-in-left {
-            animation: slideInLeft 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        .fade-in-right {
-            animation: slideInRight 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        /* Header */
-        header {
-            position: sticky;
-            top: 0;
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 0;
-        }
-
-        nav {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 16px 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: color 0.2s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-links a.active {
-            color: var(--accent-blue);
-        }
-
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--accent-blue);
-        }
-
-        .nav-right {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: backgroundMove 25s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes backgroundMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(40px, 40px); }
-        }
-
-        .hero-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 80px 80px;
-            display: grid;
-            grid-template-columns: 1fr 200px;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-text h1 {
-            font-size: 56px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
-
-        .hero-intro {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
-
-        .hero-subheading {
-            font-size: 17px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            line-height: 1.6;
-            max-width: 700px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 0;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        .btn-primary {
-            background: var(--accent-blue);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-blue-hover);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 129, 251, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: #e4e6e9;
-        }
-
-        .quick-links {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .quick-links a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .quick-links a:hover {
-            text-decoration: underline;
-        }
-
-        .hero-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            color: white;
-            font-weight: 600;
-        }
-
-        /* Section Styles */
-        section {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 80px 80px;
-        }
-
-        .section-header {
-            margin-bottom: 48px;
-            animation: slideUp 0.8s ease-out;
-        }
-
-        .section-title {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
-        }
-
-        .section-subtitle {
-            font-size: 17px;
-            color: var(--text-secondary);
-            max-width: 800px;
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .project-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.7s ease-out forwards;
-            opacity: 0;
-        }
-
-        .project-card:nth-child(1) { animation-delay: 0.1s; }
-        .project-card:nth-child(2) { animation-delay: 0.2s; }
-        .project-card:nth-child(3) { animation-delay: 0.3s; }
-        .project-card:nth-child(4) { animation-delay: 0.4s; }
-        .project-card:nth-child(5) { animation-delay: 0.5s; }
-        .project-card:nth-child(6) { animation-delay: 0.6s; }
-        .project-card:nth-child(7) { animation-delay: 0.7s; }
-        .project-card:nth-child(8) { animation-delay: 0.8s; }
-        .project-card:nth-child(9) { animation-delay: 0.9s; }
-        .project-card:nth-child(10) { animation-delay: 1s; }
-        .project-card:nth-child(11) { animation-delay: 1.1s; }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--card-shadow-hover);
-        }
-
-        .project-card:hover .view-repo {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .project-card h3 {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-
-        .project-card h3 a {
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .project-card h3 a:hover {
-            color: var(--accent-blue);
-        }
-
-        .project-description {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .stack-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .chip {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-            padding: 6px 12px;
-            border-radius: 16px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .view-repo {
-            position: absolute;
-            bottom: 32px;
-            right: 32px;
-            color: var(--accent-blue);
-            font-size: 14px;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-
-        .experience-list {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-
-        .experience-item {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 24px;
-            align-items: start;
-        }
-
-        .company-logo {
-            width: 80px;
-            height: 80px;
-            background: var(--bg-primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: var(--text-secondary);
-            font-size: 14px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-        }
-
-        .experience-content h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .experience-company {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-
-        .experience-date {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-
-        .experience-description {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Education */
-        .education-list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .education-item {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-        }
-
-        .education-item h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .education-degree {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-
-        .education-date {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-
-        .coursework {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .coursework strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Timeline Section */
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 40px;
-            bottom: 40px;
-            width: 2px;
-            background: var(--border-color);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 0;
-            margin-bottom: -80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: start;
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content-wrapper {
-            grid-column: 1;
-            padding-right: 24px;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content-wrapper {
-            grid-column: 2;
-            padding-left: 24px;
-        }
-
-        .timeline-item:nth-child(even)::after,
-        .timeline-item:nth-child(odd)::after {
-            content: '';
-            position: absolute;
-            top: 32px;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            z-index: 2;
-        }
-
-        .timeline-item:nth-child(even)::after {
-            right: calc(50% - 6px);
-        }
-
-        .timeline-item:nth-child(odd)::after {
-            left: calc(50% - 6px);
-        }
-
-        .timeline-content-wrapper {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .timeline-content {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-            display: flex;
-            gap: 20px;
-            animation: slideUp 0.5s ease-out forwards;
-            opacity: 0;
-        }
-
-        .timeline-item:nth-child(1) .timeline-content { animation-delay: 0.1s; }
-        .timeline-item:nth-child(2) .timeline-content { animation-delay: 0.2s; }
-        .timeline-item:nth-child(3) .timeline-content { animation-delay: 0.3s; }
-        .timeline-item:nth-child(4) .timeline-content { animation-delay: 0.4s; }
-        .timeline-item:nth-child(5) .timeline-content { animation-delay: 0.5s; }
-        .timeline-item:nth-child(6) .timeline-content { animation-delay: 0.6s; }
-        .timeline-item:nth-child(7) .timeline-content { animation-delay: 0.7s; }
-
-        .timeline-content:hover {
-            box-shadow: var(--card-shadow-hover);
-            transform: translateY(-2px);
-        }
-
-        .timeline-icon {
-            width: 64px;
-            height: 64px;
-            min-width: 64px;
-            background: var(--bg-primary);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text-secondary);
-            overflow: hidden;
-        }
-
-        .timeline-info {
-            flex: 1;
-        }
-
-        .timeline-date {
-            font-size: 13px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .timeline-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-
-        .timeline-company {
-            font-size: 14px;
-            color: var(--accent-blue);
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .timeline-description {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .timeline-coursework {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .timeline-coursework strong {
-            color: var(--text-primary);
-            font-weight: 600;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .experience-list {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-
-        .experience-item {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 24px;
-            align-items: start;
-        }
-
-        .company-logo {
-            width: 80px;
-            height: 80px;
-            background: var(--bg-primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: var(--text-secondary);
-            font-size: 14px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-        }
-
-        .experience-content h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .experience-company {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-
-        .experience-date {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-
-        .experience-description {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Education */
-        .education-list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .education-item {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-        }
-
-        .education-item h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .education-degree {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-
-        .education-date {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-
-        .coursework {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .coursework strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Technologies */
-        /* Technologies */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 20px;
-        }
-
-        .tech-item {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s;
-        }
-
-        .tech-item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--card-shadow-hover);
-        }
-
-        .tech-icon {
-            width: 48px;
-            height: 48px;
-            font-size: 40px;
-        }
-
-        .tech-name {
-            font-size: 13px;
-            color: var(--text-secondary);
-            text-align: center;
-            font-weight: 500;
-        }
-
-        /* Links */
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-        }
-
-        .link-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.2s;
-            animation: slideUp 0.5s ease-out forwards;
-            opacity: 0;
-        }
-
-        .link-card:nth-child(1) { animation-delay: 0.1s; }
-        .link-card:nth-child(2) { animation-delay: 0.2s; }
-        .link-card:nth-child(3) { animation-delay: 0.3s; }
-        .link-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .link-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--card-shadow-hover);
-        }
-
-        .link-card h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-        }
-
-        .link-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--bg-white);
-            border-top: 1px solid var(--border-color);
-            padding: 40px 80px;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 16px;
-        }
-
-        .footer-links a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .footer-note {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-top: 16px;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 16px;
-                padding: 16px 40px;
-            }
-
-            .nav-links {
-                gap: 16px;
-                font-size: 14px;
-            }
-
-            .hero-content {
-                grid-template-columns: 1fr;
-                padding: 48px 40px;
-                gap: 32px;
-            }
-
-            .hero-image {
-                width: 150px;
-                height: 150px;
-                font-size: 60px;
-                margin: 0 auto;
-            }
-
-            .hero-text h1 {
-                font-size: 36px;
-            }
-
-            section {
-                padding: 48px 40px;
-            }
-
-            .section-title {
-                font-size: 32px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline::before {
-                display: none;
-            }
-
-            .timeline-item {
-                display: flex;
-                flex-direction: column;
-                padding-bottom: 40px;
-                gap: 16px;
-            }
-
-            .timeline-date {
-                text-align: left;
-                font-size: 13px;
-                padding-top: 0;
-            }
-
-            .timeline-icon {
-                width: 64px;
-                height: 64px;
-                font-size: 12px;
-                margin: 0 auto;
-            }
-
-            .timeline-content-wrapper {
-                width: 100%;
-            }
-
-            .timeline-content {
-                padding: 24px;
-            }
-
-            .experience-item {
-                grid-template-columns: 1fr;
-            }
-
-            .tech-grid {
-                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-                gap: 16px;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-        }
-
-        /* Focus states for accessibility */
-        a:focus, button:focus {
-            outline: 2px solid var(--accent-blue);
-            outline-offset: 2px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medhavi Uday Pande</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root{
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --ink:#1d1d1f;
+  --ink-soft:#6e6e73;
+  --ink-faint:#a1a1a6;
+  --accent:#123d70;
+  --accent-soft:#e6edf6;
+  --divider:#d6d6da;
+  --radius:18px;
+  --shadow:0 2px 10px rgba(0,0,0,0.06);
+  --shadow-hover:0 10px 28px rgba(0,0,0,0.12);
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter',sans-serif;
+  color:var(--ink);
+  line-height:1.6;
+  font-size:15px;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 30% 35%, rgba(10,132,255,0.55), transparent 45%),
+    radial-gradient(circle at 68% 40%, rgba(255,45,85,0.5), transparent 45%),
+    radial-gradient(circle at 50% 70%, rgba(48,209,88,0.45), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.35), transparent 25%),
+    linear-gradient(160deg, #050510 0%, #0a0a18 100%);
+  background-size:220% 220%;
+  animation: gradientDrift 20s ease-in-out infinite;
+  background-attachment:fixed;
+  overflow-x:hidden;
+  padding-bottom:110px;
+  position:relative;
+}
+@keyframes gradientDrift{
+  0%{ background-position:0% 50%; }
+  50%{ background-position:100% 50%; }
+  100%{ background-position:0% 50%; }
+}
+.orb{
+  position:fixed; border-radius:50%; filter:blur(80px); pointer-events:none; z-index:0; opacity:0.45;
+}
+.orb1{width:460px; height:460px; background:rgba(10,132,255,0.5); top:-100px; left:-100px; animation: orbFloat1 22s ease-in-out infinite;}
+.orb2{width:420px; height:420px; background:rgba(255,45,85,0.4); bottom:-80px; right:-80px; animation: orbFloat2 26s ease-in-out infinite;}
+.orb3{width:360px; height:360px; background:rgba(48,209,88,0.4); top:40%; left:65%; animation: orbFloat3 20s ease-in-out infinite;}
+@keyframes orbFloat1{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(80px,60px);} }
+@keyframes orbFloat2{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(-70px,-50px);} }
+@keyframes orbFloat3{ 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-60px,40px) scale(1.15);} }
+h1,h2,h3{font-weight:700; letter-spacing:-0.01em;}
+a{color:inherit;}
+
+/* macOS Menu Bar */
+.menubar{
+  position:fixed; top:0; left:0; right:0; height:26px; z-index:2000;
+  background:rgba(255,255,255,0.55); backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 16px; font-size:12.5px; font-weight:600; color:#1d1d1f;
+  border-bottom:1px solid rgba(255,255,255,0.3);
+}
+.menubar-left{display:flex; align-items:center; gap:18px;}
+.menubar-left .apple-logo{font-size:14px;}
+.menubar-left span{opacity:0.85; font-weight:500;}
+.menubar-left .app-name{font-weight:700; opacity:1;}
+.menubar-right{display:flex; align-items:center; gap:14px; font-size:12px;}
+
+/* Window */
+.desktop-area{padding-top:52px; display:flex; justify-content:center;}
+.window{
+  width:94%; max-width:1200px; background:rgba(246,246,248,0.85); backdrop-filter:blur(30px);
+  -webkit-backdrop-filter:blur(30px);
+  border-radius:14px; box-shadow:0 30px 80px rgba(0,0,0,0.35); overflow:hidden;
+  border:1px solid rgba(255,255,255,0.4);
+  animation: windowOpen 0.6s cubic-bezier(0.16,1,0.3,1);
+  position:relative; z-index:1;
+}
+@keyframes windowOpen{
+  from{ opacity:0; transform:scale(0.94) translateY(20px); }
+  to{ opacity:1; transform:scale(1) translateY(0); }
+}
+.titlebar{
+  height:38px; background:rgba(230,230,235,0.7); display:flex; align-items:center; padding:0 16px;
+  border-bottom:1px solid var(--divider); position:relative;
+}
+.traffic-lights{display:flex; gap:8px;}
+.tl{width:12px; height:12px; border-radius:50%; position:relative; transition:transform .15s; cursor:pointer;}
+.tl.red{background:#ff5f57;}
+.tl.yellow{background:#febc2e;}
+.tl.green{background:#28c840;}
+.tl:hover{transform:scale(1.15);}
+.traffic-lights:hover .tl::after{opacity:1;}
+.tl::after{
+  content:''; position:absolute; inset:0; opacity:0; transition:opacity .15s;
+  background-repeat:no-repeat; background-position:center; background-size:7px;
+}
+.titlebar-title{
+  position:absolute; left:50%; transform:translateX(-50%); font-size:12.5px; font-weight:600; color:var(--ink-soft);
+}
+
+.content{padding:36px 44px;}
+section{max-width:800px; margin:0 auto 60px; opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; scroll-margin-top:20px;}
+#projects{max-width:1040px;}
+section.in-view{opacity:1; transform:translateY(0);}
+.section-header{margin-bottom:22px;}
+.section-title{font-size:28px; margin-bottom:6px;}
+.section-sub{color:var(--ink-soft); font-size:14px;}
+
+/* Hero */
+.hero-card{
+  background:var(--card); border-radius:24px; box-shadow:var(--shadow); padding:40px; text-align:center; margin-bottom:24px;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.hero-card:hover{box-shadow:var(--shadow-hover);}
+.hero-card img.avatar{
+  width:96px; height:96px; border-radius:50%; object-fit:cover; margin-bottom:20px; box-shadow:var(--shadow-hover);
+}
+.hero-card h1{font-size:34px; margin-bottom:8px;}
+.hero-card .role-line{color:var(--accent); font-weight:600; font-size:15.5px; margin-bottom:4px;}
+.hero-card .subrole-line{color:var(--ink-faint); font-size:12.5px; margin-bottom:20px;}
+.hero-card p.tagline{color:var(--ink-soft); font-size:14.5px; max-width:560px; margin:0 auto 26px;}
+.cta-row{display:flex; justify-content:center; gap:10px; flex-wrap:wrap;}
+.btn{padding:10px 22px; border-radius:980px; font-weight:600; font-size:13.5px; text-decoration:none; transition:all .2s ease; display:inline-block;}
+.btn-primary{background:var(--accent); color:white;}
+.btn-primary:hover{background:#0064cc; transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,113,227,0.35);}
+.btn-ghost{background:var(--bg); color:var(--ink); border:1px solid var(--divider);}
+.btn-ghost:hover{background:var(--divider); transform:translateY(-2px);}
+
+.numbers-strip{display:grid; grid-template-columns:repeat(4,1fr); background:var(--card); border-radius:18px; box-shadow:var(--shadow); overflow:hidden;}
+.num-card{padding:30px 16px; text-align:center; border-right:1px solid #ececef; position:relative; transition:background .2s ease;}
+.num-card:last-child{border-right:none;}
+.num-card:hover{background:var(--accent-soft);}
+.num-card .icon-tile{width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; margin:0 auto 10px;}
+.num-card .icon-tile img{width:16px; height:16px;}
+.num-card .icon-tile img.lucide-icon{filter:invert(1);}
+.num-card .num{font-size:22px; font-weight:800; color:var(--ink); letter-spacing:-0.01em;}
+.num-card .lbl{font-size:11px; color:var(--ink-soft); margin-top:4px; font-weight:600;}
+
+.pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+.pillar{background:var(--card); border-radius:16px; box-shadow:var(--shadow); padding:22px; transition:transform .2s ease;}
+.pillar:hover{transform:translateY(-4px);}
+.pillar .icon-tile{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;color:white;margin-bottom:12px;}
+.pillar h4{font-size:15px; margin-bottom:6px;}
+.pillar p{font-size:12.5px; color:var(--ink-soft); line-height:1.55;}
+
+.projects-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+.project-card{background:var(--card); border-radius:18px; box-shadow:var(--shadow); padding:22px; cursor:pointer; transition:box-shadow .2s ease, transform .2s ease; display:flex; flex-direction:column;}
+.project-card:hover{box-shadow:var(--shadow-hover); transform:translateY(-3px) scale(1.005);}
+.impact-tag{display:inline-block; background:var(--accent-soft); color:var(--accent); font-size:11px; font-weight:700; padding:4px 10px; border-radius:8px; margin-bottom:10px;}
+.project-card h3{font-size:16.5px; margin-bottom:8px;}
+.project-card h3 a{text-decoration:none; color:var(--ink);}
+.project-card h3 a:hover{color:var(--accent);}
+.project-desc{font-size:13px; color:var(--ink-soft); margin-bottom:12px;}
+.chips{display:flex; flex-wrap:wrap; gap:6px;}
+.chip{background:var(--bg); color:var(--ink-soft); padding:4px 10px; border-radius:8px; font-size:11px; font-weight:600;}
+.view-repo{font-size:12px; font-weight:600; color:var(--accent); text-decoration:none; margin-top:12px; display:inline-block;}
+
+.journey-card{background:var(--card); border-radius:18px; box-shadow:var(--shadow); padding:22px; margin-bottom:14px; display:flex; gap:16px; align-items:flex-start; transition:transform .2s ease;}
+.journey-card:hover{transform:translateY(-3px);}
+.journey-icon{width:48px; height:48px; min-width:48px; border-radius:0; overflow:hidden; box-shadow:var(--shadow);}
+.journey-icon img{width:100%; height:100%; object-fit:cover;}
+.journey-date{font-family:'SF Mono','Menlo','Consolas',monospace; font-size:11px; font-weight:600; color:var(--accent); margin-bottom:5px; letter-spacing:.01em;}
+.journey-title{font-size:15px; font-weight:700; margin-bottom:3px;}
+.journey-company{font-size:12.5px; color:var(--ink-faint); margin-bottom:8px;}
+.journey-desc{font-size:12.5px; color:var(--ink-soft); line-height:1.55;}
+
+.edu-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:14px;}
+.edu-card{background:var(--card); border-radius:16px; box-shadow:var(--shadow); padding:18px; display:flex; gap:14px; align-items:flex-start;}
+
+.cert-hero{padding:26px; margin-bottom:20px; text-align:center; background:var(--accent-soft); border-radius:18px;}
+.cert-hero .big-number{font-size:28px; font-weight:800; color:var(--accent);}
+.cert-featured-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px;}
+.cert-card{background:var(--card); border-radius:16px; box-shadow:var(--shadow); padding:26px 18px; text-align:center; transition:transform .2s ease, box-shadow .2s ease; text-decoration:none; color:var(--ink); display:block; overflow:hidden; position:relative;}
+.cert-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-hover); cursor:pointer;}
+.cert-badge-icon{margin:0 auto 14px; display:flex; align-items:center; justify-content:center; width:120px; height:120px; overflow:hidden;}
+.cert-badge-icon img{width:120px; height:120px; max-width:120px; max-height:120px; object-fit:contain; display:block;}
+.cert-card h4{font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; color:var(--ink); line-height:1.3;}
+
+.sub-heading{font-size:14.5px; font-weight:700; margin:24px 0 10px; color:var(--ink-soft);}
+.course-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+.course-card{
+  background:var(--card); box-shadow:var(--shadow); border-radius:980px; padding:14px 22px;
+  text-decoration:none; color:var(--ink); transition:transform .2s ease, box-shadow .2s ease;
+  display:flex; flex-direction:row; align-items:center; gap:14px; text-align:left;
+}
+.course-card:hover{transform:translateY(-3px); box-shadow:var(--shadow-hover);}
+.course-card .provider-icon{display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.course-card .provider-icon img{width:26px; height:26px; object-fit:contain;}
+.course-card .cname{font-size:13px; font-weight:600; line-height:1.3;}
+.course-card .cprovider{display:none;}
+
+.research-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+.research-card{background:var(--card); border-radius:18px; box-shadow:var(--shadow); padding:24px; transition:transform .2s ease, box-shadow .2s ease;}
+.research-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-hover);}
+.research-tag{display:inline-block; font-size:10.5px; font-weight:700; padding:4px 10px; border-radius:8px; background:var(--accent-soft); color:var(--accent); margin-bottom:12px;}
+.research-card h3{font-size:17px; margin-bottom:10px;}
+.research-card p{font-size:13px; color:var(--ink-soft); margin-bottom:14px;}
+.research-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px;}
+.rstat{background:var(--bg); border-radius:12px; padding:10px; text-align:center;}
+.rstat .val{font-weight:800; font-size:14px; color:var(--accent);}
+.rstat .lbl{font-size:10px; color:var(--ink-faint); margin-top:2px;}
+.research-card a.repo-link{font-weight:700; font-size:12.5px; color:var(--accent); text-decoration:none;}
+
+.coding-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+.coding-card{background:var(--card); border-radius:18px; box-shadow:var(--shadow); padding:22px; transition:transform .2s ease, box-shadow .2s ease;}
+.coding-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-hover);}
+.coding-card h3{font-size:16px; margin-bottom:6px; display:flex; align-items:center; gap:10px;}
+.coding-card h3 img{width:32px; height:32px;}
+.coding-card .handle a{font-size:12px; color:var(--accent); text-decoration:none; font-weight:600;}
+.stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:16px 0;}
+.stat-box{background:var(--bg); border-radius:10px; padding:10px; text-align:center;}
+.stat-box .num{font-size:16px; font-weight:800; color:var(--accent);}
+.stat-box .lbl{font-size:10px; color:var(--ink-faint); margin-top:2px;}
+.badge-row{display:flex; gap:12px; flex-wrap:wrap;}
+.badge-item{font-size:11px; color:var(--ink-soft); font-weight:600;}
+.hr-star-row{display:flex; gap:2px; margin:6px 0 10px;}
+.hr-star{color:#ff9500; font-size:15px;}
+
+.tech-flow{display:grid; grid-template-columns:repeat(auto-fill,minmax(90px,1fr)); gap:12px;}
+.tech-item{
+  background:var(--card); box-shadow:var(--shadow); padding:16px 8px; border-radius:14px;
+  display:flex; flex-direction:column; align-items:center; gap:8px; transition:transform .15s, box-shadow .15s;
+}
+.tech-item:hover{transform:translateY(-3px); box-shadow:var(--shadow-hover);}
+.tech-item img{width:44px; height:44px;}
+.tech-item span.emoji-fallback{font-size:22px;}
+.tech-item .tname{font-size:10.5px; color:var(--ink-soft); font-weight:600; text-align:center;}
+
+.links-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+.link-card{background:var(--card); border-radius:16px; box-shadow:var(--shadow); padding:18px; text-decoration:none; color:var(--ink); display:flex; align-items:center; gap:12px; transition:transform .2s ease;}
+.link-card:hover{box-shadow:var(--shadow-hover); transform:translateY(-3px);}
+.link-card .icon-tile{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:white;flex-shrink:0;}
+.link-card .icon-tile img{width:20px; height:20px;}
+.link-card h4{font-size:13.5px; font-weight:700;}
+.link-card p{font-size:11px; color:var(--ink-faint);}
+
+.footer-text{text-align:center; color:var(--ink-faint); font-size:12px; padding:20px;}
+
+/* Dock */
+.dock-wrap{
+  position:fixed; bottom:14px; left:0; right:0; display:flex; justify-content:center; z-index:1500; pointer-events:none;
+}
+.dock{
+  display:flex; align-items:flex-end; gap:10px; padding:10px 14px;
+  background:rgba(255,255,255,0.35); backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-radius:20px; border:1px solid rgba(255,255,255,0.5);
+  box-shadow:0 12px 32px rgba(0,0,0,0.25); pointer-events:auto;
+}
+.dock-item{
+  width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+  font-size:22px; cursor:pointer; transition:transform .15s ease; position:relative; color:white;
+}
+.dock-item:hover{ transform:translateY(-4px) scale(1.08); }
+.dock-item img{width:22px; height:22px; filter:invert(1);}
+.dock-tooltip{
+  position:absolute; bottom:60px; left:50%; transform:translateX(-50%);
+  background:rgba(30,30,32,0.9); color:white; font-size:11.5px; font-weight:600;
+  padding:5px 10px; border-radius:6px; white-space:nowrap; opacity:0; pointer-events:none;
+  transition:opacity .15s ease; backdrop-filter:blur(6px);
+}
+.dock-tooltip::after{
+  content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+  border:5px solid transparent; border-top-color:rgba(30,30,32,0.9);
+}
+.dock-item:hover .dock-tooltip{ opacity:1; }
+.dock-item .dock-dot{
+  position:absolute; bottom:-8px; left:50%; transform:translateX(-50%);
+  width:4px; height:4px; border-radius:50%; background:#1d1d1f; opacity:0; transition:opacity .2s;
+}
+.dock-item.active .dock-dot{opacity:0.6;}
+.dock-item.bounce{ animation: dockBounce .5s cubic-bezier(.28,1.5,.5,1); }
+@keyframes dockBounce{
+  0%{transform:scale(1) translateY(0);}
+  30%{transform:scale(1.15) translateY(-18px);}
+  55%{transform:scale(0.96) translateY(2px);}
+  75%{transform:scale(1.05) translateY(-6px);}
+  100%{transform:scale(1) translateY(0);}
+}
+
+@media (max-width:900px){
+  .content{padding:24px 20px;}
+  .numbers-strip, .pillars, .edu-grid, .cert-featured-grid, .research-stats, .research-grid, .coding-grid, .links-grid, .projects-grid{grid-template-columns:1fr 1fr;}
+  .numbers-strip .num-card{border-right:1px solid #ececef; border-bottom:1px solid #ececef;}
+  .numbers-strip .num-card:nth-child(2n){border-right:none;}
+  .numbers-strip .num-card:nth-last-child(-n+2){border-bottom:none;}
+  .hero-card h1{font-size:26px;}
+  .section-title{font-size:22px;}
+  .dock-item{width:38px; height:38px; font-size:18px;}
+  .menubar-left span:not(.app-name){display:none;}
+  .hero-card{padding:28px 22px;}
+  .hero-card .avatar{width:76px; height:76px;}
+}
+@media (max-width:560px){
+  .numbers-strip, .cert-featured-grid, .research-stats, .research-grid, .coding-grid, .links-grid, .edu-grid, .projects-grid{grid-template-columns:1fr;}
+  .numbers-strip .num-card{border-right:none !important; border-bottom:1px solid #ececef;}
+  .numbers-strip .num-card:last-child{border-bottom:none;}
+  .course-grid{grid-template-columns:repeat(2,1fr);}
+  .cta-row{flex-direction:column; align-items:stretch;}
+  .cta-row .btn{width:100%; text-align:center;}
+}
+</style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Medhavi Uday Pande</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Journey</a></li>
-                <li><a href="#technologies">Technologies</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="nav-right">
-            </div>
-        </nav>
-    </header>
 
-    <section class="hero" id="about">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Hi, I'm Medhavi</h1>
-                <p class="hero-subheading">I am a Data Engineer & Business Intelligence Analyst with 4+ years of experience in building data architectures and cloud based analytical systems that move data from chaos to clarity. I focus on building products for FinTech, Supply Chain and more domains that are impactful and drive business through data-driven decision-making. I specialize in data engineering, analytics, warehousing, and modeling with expertise in Python, SQL, dbt, Spark, Kafka across AWS, Azure, GCP, Snowflake, Databricks, Applied AI/ML.</p>
-                <div class="cta-buttons">
-                    <a href="https://github.com/medhavipande18" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://www.linkedin.com/in/medhavipande18/" class="btn btn-secondary" target="_blank" rel="noopener">LinkedIn</a>
-                    <a href="https://leetcode.com/u/medhavipande/" class="btn btn-secondary" target="_blank" rel="noopener">LeetCode</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="headshot.jpg" alt="Medhavi Pande" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-            </div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<div class="menubar">
+  <div class="menubar-left">
+    <span class="apple-logo">🍎</span>
+    <span class="app-name">Portfolio</span>
+    <span>File</span>
+    <span>Edit</span>
+    <span>View</span>
+    <span>Window</span>
+    <span>Help</span>
+  </div>
+  <div class="menubar-right">
+    <span>🔍</span>
+    <span>📶</span>
+    <span>🔋</span>
+    <span id="clock">--:--</span>
+  </div>
+</div>
+
+<div class="desktop-area">
+  <div class="window">
+    <div class="titlebar">
+      <div class="traffic-lights">
+        <div class="tl red"></div>
+        <div class="tl yellow"></div>
+        <div class="tl green"></div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <section id="about">
+        <div class="hero-card">
+          <img class="avatar" src="headshot.jpg" alt="Medhavi Pande">
+          <h1>Hi, I'm Medhavi</h1>
+          <div class="role-line">Data Engineer, supporting AI & BI in the Cloud</div>
+          <div class="subrole-line">Strategy-minded builder · Cloud Data Architecture · Applied AI/ML</div>
+          <p class="tagline">I sit at the intersection of business strategy and technical execution — translating real-world problems into data architectures, AI-powered systems, and BI platforms that create measurable impact. My work spans FinTech, Supply Chain, and beyond.</p>
+          <div class="cta-row">
+            <a href="mailto:medhavipande9@gmail.com" class="btn btn-primary">Get in Touch</a>
+            <a href="https://github.com/medhavipande18" target="_blank" class="btn btn-ghost">GitHub</a>
+            <a href="https://leetcode.com/u/medhavipande/" target="_blank" class="btn btn-ghost">LeetCode</a>
+          </div>
         </div>
-    </section>
 
-    <section id="projects">
+        <div class="numbers-strip">
+          <div class="num-card"><div class="num" data-count="2" data-suffix="x">0x</div><div class="lbl">AWS Certified</div></div>
+          <div class="num-card"><div class="num" data-count="11" data-suffix="+">0+</div><div class="lbl">Projects Delivered</div></div>
+          <div class="num-card"><div class="num" data-count="5" data-suffix="★">0★</div><div class="lbl">HackerRank SQL</div></div>
+          <div class="num-card"><div class="num" data-count="4" data-suffix="+">0+</div><div class="lbl">Years Building</div></div>
+        </div>
+      </section>
+
+      <section id="how" style="display:none;"></section>
+
+      <section id="coding">
+        <div class="section-header"><h2 class="section-title">Coding Accomplishments</h2></div>
+        <div class="coding-grid">
+          <div class="coding-card">
+            <h3><img src="https://cdn.simpleicons.org/leetcode/FFA116" alt="">LeetCode</h3>
+            <div class="handle"><a href="https://leetcode.com/u/medhavipande/" target="_blank">@medhavipande →</a></div>
+            <div class="stat-row"><div class="stat-box"><div class="num">80+</div><div class="lbl">Day Streak (Python)</div></div><div class="stat-box"><div class="num">151</div><div class="lbl">Submissions</div></div><div class="stat-box"><div class="num">SQL 50</div><div class="lbl">Challenge</div></div></div>
+          </div>
+          <div class="coding-card">
+            <h3><img src="https://cdn.simpleicons.org/hackerrank/2EC866" alt="">HackerRank</h3>
+            <div class="handle"><a href="https://www.hackerrank.com/profile/medhavipande24" target="_blank">@medhavipande24 →</a></div>
+            <div class="hr-star-row"><span class="hr-star">★</span><span class="hr-star">★</span><span class="hr-star">★</span><span class="hr-star">★</span><span class="hr-star">★</span></div>
+            <p style="font-size:12.5px; color:var(--ink-soft);">5-Star rated in <strong>SQL</strong> — HackerRank's top proficiency tier.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="certifications">
+        <div class="section-header"><h2 class="section-title">Licenses</h2></div>
+        <div class="cert-featured-grid">
+          <a class="cert-card" href="https://www.credly.com/badges/6143e2d1-30da-488a-b7e9-07f5e9c7fa66/public_url" target="_blank"><div class="cert-badge-icon"><img src="licenses/aws-cloud-prac.png" alt=""></div><h4>AWS Cloud Practitioner</h4></a>
+          <a class="cert-card" href="https://www.credly.com/badges/4490ea24-afb3-4c3a-9a06-50273127a9f0/public_url" target="_blank"><div class="cert-badge-icon"><img src="licenses/aws-data-engineer.png" alt=""></div><h4>AWS Data Engineer – Associate</h4></a>
+          <a class="cert-card" href="https://www.linkedin.com/learning/certificates/fbd67938403d68f5f1c8d1215d70d36120654ee5704df2400e0ab733f2186ef8?u=74653650" target="_blank"><div class="cert-badge-icon"><img src="licenses/snowflake.png" alt=""></div><h4>Data Engineering Professional Certificate</h4></a>
+          <a class="cert-card" href="https://credentials.databricks.com/c48aac08-3874-4275-9b24-d5d9c71e713e#acc.w61Nxlzs" target="_blank"><div class="cert-badge-icon"><img src="licenses/db-databricks-fundamentals.png" alt=""></div><h4>Databricks Fundamentals</h4></a>
+          <a class="cert-card" href="https://credentials.databricks.com/9ea17d10-cab2-46b3-bd23-cdb73b235882#acc.h1z6UNOP" target="_blank"><div class="cert-badge-icon"><img src="licenses/db-ai-agent.png" alt=""></div><h4>Databricks AI Agent Fundamentals</h4></a>
+          <a class="cert-card" href="https://credentials.databricks.com/c975f5b3-12f3-48c5-9b70-789b69ee7c15#acc.cS3RrQL9" target="_blank"><div class="cert-badge-icon"><img src="licenses/db-platform-architect.png" alt=""></div><h4>AWS Databricks Platform Architect</h4></a>
+        </div>
+      </section>
+
+      <section id="research">
+        <div class="section-header"><h2 class="section-title">Technical Research</h2></div>
+        <div class="research-grid">
+          <div class="research-card">
+            <span class="research-tag">AI & Data Systems</span>
+            <h3>AI & Data-Driven Customer Acquisition</h3>
+            <p>A technical research study on how AI and data systems power B2B SaaS customer acquisition — approached from a data engineering and ML systems angle rather than a marketing one. Argues that most AI-driven acquisition fails not from bad strategy, but from broken underlying data architecture.</p>
+            <div class="research-stats">
+              <div class="rstat"><div class="val">23–35%</div><div class="lbl">Lift from lead scoring</div></div>
+              <div class="rstat"><div class="val">76%</div><div class="lbl">Highest ROI via ABM</div></div>
+              <div class="rstat"><div class="val">74%</div><div class="lbl">Chatbot rollback rate</div></div>
+              <div class="rstat"><div class="val">95%</div><div class="lbl">AI failures from data gaps</div></div>
+            </div>
+            <a class="repo-link" href="https://github.com/medhavipande18/ai-customer-acquisition" target="_blank">View Repository & Paper →</a>
+          </div>
+          <div class="research-card">
+            <span class="research-tag">Data Architecture</span>
+            <h3>From Monolith to Medallion</h3>
+            <p>Companion repository to a technical review paper analyzing three landmark data migrations (Netflix, Uber, Capital One), identifying five persistent post-migration gaps, and proposing a five-phase migration framework.</p>
+            <div class="research-stats">
+              <div class="rstat"><div class="val">3</div><div class="lbl">Migrations reviewed</div></div>
+              <div class="rstat"><div class="val">5</div><div class="lbl">Gaps identified</div></div>
+              <div class="rstat"><div class="val">5-phase</div><div class="lbl">Framework proposed</div></div>
+              <div class="rstat"><div class="val">8</div><div class="lbl">Code modules</div></div>
+            </div>
+            <a class="repo-link" href="https://github.com/medhavipande18/monolith-to-medallion" target="_blank">View Repository & Paper →</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="journey">
         <div class="section-header">
-            <h2 class="section-title">Projects</h2>
+          <h2 class="section-title">Professional Work Experience</h2>
         </div>
+
+        <div class="journey-card">
+          <div class="journey-icon"><img src="logos/dell.jpg" alt="DELL"></div>
+          <div><div class="journey-date">Sep 2025 – Present</div><div class="journey-title">Senior Data Engineer (Contract)</div><div class="journey-company">Dell Technologies, Hopkinton, MA (Remote)</div></div>
+        </div>
+        <div class="journey-card">
+          <div class="journey-icon"><img src="logos/dell.jpg" alt="DELL"></div>
+          <div><div class="journey-date">Jul 2024 – Dec 2024</div><div class="journey-title">BI Data Engineer</div><div class="journey-company">Dell Technologies, Hopkinton, MA</div></div>
+        </div>
+        <div class="journey-card">
+          <div class="journey-icon"><img src="logos/yardi.jpg" alt="YARDI"></div>
+          <div><div class="journey-date">Jul 2021 – Jul 2023</div><div class="journey-title">Senior Data Engineer</div><div class="journey-company">Yardi Systems, Pune, India</div></div>
+        </div>
+        <div class="journey-card">
+          <div class="journey-icon"><img src="logos/lotus.jpg" alt="LOTUS"></div>
+          <div><div class="journey-date">Jul 2020 – Jun 2021</div><div class="journey-title">Data Engineer</div><div class="journey-company">Lotus Surgical, Aurangabad, India</div></div>
+        </div>
+      </section>
+
+      <section id="education">
+        <div class="section-header"><h2 class="section-title">Education</h2></div>
+        <div class="edu-grid">
+          <div class="edu-card"><div class="journey-icon"><img src="logos/northeastern.jpg" alt="NEU"></div><div><div class="journey-date">Sep 2023 – Dec 2025</div><div class="journey-title">Master of Science, Data Analytics Engineering</div><div class="journey-company">Northeastern University, Boston, MA</div></div></div>
+          <div class="edu-card"><div class="journey-icon"><img src="logos/pict.jpg" alt="PICT"></div><div><div class="journey-date">Aug 2017 – Jun 2021</div><div class="journey-title">Bachelor of Engineering, Electronics & Computer</div><div class="journey-company">Pune Institute of Computer Technology, Pune, India</div></div></div>
+        </div>
+      </section>
+
+      <section id="courses">
+        <div class="section-header"><h2 class="section-title">Certifications</h2></div>
+        <div class="course-grid">
+          <a class="course-card" href="https://www.linkedin.com/learning/certificates/fbd67938403d68f5f1c8d1215d70d36120654ee5704df2400e0ab733f2186ef8?u=74653650" target="_blank"><div class="provider-icon"><img src="logos/linkedin.png" alt=""></div><div class="cprovider">LinkedIn</div><div class="cname">Data Engineering by Snowflake</div></a>
+          <a class="course-card" href="https://www.linkedin.com/learning/certificates/1a3674ea3980c8f6450051aa25c5bdbc0a21cc9730fc9f43e6526cb3a164a7ba?u=74653650" target="_blank"><div class="provider-icon"><img src="logos/linkedin.png" alt=""></div><div class="cprovider">LinkedIn</div><div class="cname">System Design in Cloud</div></a>
+          <a class="course-card" href="https://www.linkedin.com/learning/certificates/4dd1bddcde9c3acc4909048d7e40da733cff9c0779310ca27053664c001765ae?u=74653650" target="_blank"><div class="provider-icon"><img src="logos/linkedin.png" alt=""></div><div class="cprovider">LinkedIn</div><div class="cname">Data-Driven Product Management</div></a>
+          <a class="course-card" href="https://www.linkedin.com/learning/certificates/226eba41e3795295e639fc08b0d5886fa004abad1b91e3fe08b16a23e3014142?u=74653650" target="_blank"><div class="provider-icon"><img src="logos/linkedin.png" alt=""></div><div class="cprovider">LinkedIn</div><div class="cname">Agile Foundations</div></a>
+          <a class="course-card" href="https://www.linkedin.com/learning/certificates/3d49cafa6aab06d39b534be0c3ed2aa3a7ea0f6641c561cd71a57dc97c34fb4c?u=74653650" target="_blank"><div class="provider-icon"><img src="logos/linkedin.png" alt=""></div><div class="cprovider">LinkedIn</div><div class="cname">Advanced Prompt Engineering</div></a>
+          <a class="course-card" href="https://www.linkedin.com/learning/certificates/4b1f077ff58e50359d3c34ebb88806bacf24bf39570eeb5a90f1de967346e6d1?u=74653650" target="_blank"><div class="provider-icon"><img src="logos/linkedin.png" alt=""></div><div class="cprovider">LinkedIn</div><div class="cname">Lean Six Sigma Foundations</div></a>
+          <a class="course-card" href="https://www.linkedin.com/learning/certificates/04014f27e60cb36e3747f4f7c064673ed65da66817a084e364f2a04e0cd9cb5f?u=74653650" target="_blank"><div class="provider-icon"><img src="logos/linkedin.png" alt=""></div><div class="cprovider">LinkedIn</div><div class="cname">AWS: Data Services</div></a>
+          <a class="course-card" href="https://www.linkedin.com/learning/certificates/46d5565b9e0ad1964b471574cc5052a535ba27c6e2ac3284ac9e074bfccb6431?u=74653650" target="_blank"><div class="provider-icon"><img src="logos/linkedin.png" alt=""></div><div class="cprovider">LinkedIn</div><div class="cname">Supply Chain Foundations</div></a>
+          <a class="course-card" href="#" target="_blank"><div class="provider-icon"><span class="emoji-fallback">🎓</span></div><div class="cprovider">Badgr</div><div class="cname">Graduate Leadership Institute</div></a>
+          <a class="course-card" href="https://www.linkedin.com/learning/certificates/a5f03e2b1347ddfaece4275351e2feacf6cbb569963a6b7f6960c94726441448?u=74653650" target="_blank"><div class="provider-icon"><img src="logos/linkedin.png" alt=""></div><div class="cprovider">LinkedIn</div><div class="cname">Data Engineering Foundations</div></a>
+          <a class="course-card" href="https://www.coursera.org/account/accomplishments/certificate/2BLVQ2H9UMBH" target="_blank"><div class="provider-icon"><img src="https://cdn.simpleicons.org/coursera/0056D2" alt=""></div><div class="cprovider">Coursera</div><div class="cname">AWS Fundamentals: Going Cloud-Native</div></a>
+          <a class="course-card" href="https://www.coursera.org/account/accomplishments/certificate/JSHBM6SADTQ2" target="_blank"><div class="provider-icon"><img src="https://cdn.simpleicons.org/coursera/0056D2" alt=""></div><div class="cprovider">Coursera</div><div class="cname">Power BI Desktop</div></a>
+          <a class="course-card" href="https://www.coursera.org/account/accomplishments/certificate/LNG37V74NAR2" target="_blank"><div class="provider-icon"><img src="https://cdn.simpleicons.org/coursera/0056D2" alt=""></div><div class="cprovider">Coursera</div><div class="cname">Python Data Structures</div></a>
+          <a class="course-card" href="https://www.coursera.org/account/accomplishments/certificate/KMEESMY2U7Z3" target="_blank"><div class="provider-icon"><img src="https://cdn.simpleicons.org/coursera/0056D2" alt=""></div><div class="cprovider">Coursera</div><div class="cname">Programming for Everybody</div></a>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-header">
+          <h2 class="section-title">Projects</h2>
+        </div>
+
         <div class="projects-grid">
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/LogiStream-SupplyChain-DW', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/LogiStream-SupplyChain-DW" target="_blank" rel="noopener">LogiStream: Data Pipeline & Warehouse Integration</a></h3>
-                <p class="project-description">Designed a data warehousing pipeline integrating operational data for churn analytics. Conducted exploratory and statistical analysis to identify key churn drivers and applied supervised ML with Top-K targeting to support retention and business decision-making.</p>
-                <div class="stack-chips">
-                    <span class="chip">Python</span>
-                    <span class="chip">SQL</span>
-                    <span class="chip">Data Warehouse</span>
-                    <span class="chip">ML</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/SpeakingBot-MLOps', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/SpeakingBot-MLOps" target="_blank" rel="noopener">Speaking Bot: MLOps-Driven RAG System</a></h3>
-                <p class="project-description">Developed a production-grade MLOps pipeline supporting an LLM-based Retrieval-Augmented Generation system. Orchestrated data ingestion and validation using Airflow, deployed containerized services via CI/CD with GitHub Actions and Docker, and managed experiments using MLflow on GCP.</p>
-                <div class="stack-chips">
-                    <span class="chip">MLOps</span>
-                    <span class="chip">Airflow</span>
-                    <span class="chip">Docker</span>
-                    <span class="chip">GCP</span>
-                    <span class="chip">MLflow</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/SaaS-Churn-Intelligence', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/SaaS-Churn-Intelligence" target="_blank" rel="noopener">SaaS Churn Intelligence Platform</a></h3>
-                <p class="project-description">Built an end-to-end churn prediction system for a SaaS product using leakage-safe weekly snapshots and interpretable feature engineering. Applied supervised machine learning with business-aligned evaluation (Top-K targeting) to support customer retention and outreach strategies.</p>
-                <div class="stack-chips">
-                    <span class="chip">Python</span>
-                    <span class="chip">Machine Learning</span>
-                    <span class="chip">Feature Engineering</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/Sales-Supply-Chain-Analytics', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/Sales-Supply-Chain-Analytics" target="_blank" rel="noopener">Sales & Supply Chain Analytics Suite</a></h3>
-                <p class="project-description">Developed an end-to-end supply chain analytics case study using Python and synthetic operational data. Delivered descriptive, diagnostic, predictive, and prescriptive analyses to support demand planning, inventory optimization, and operational decision-making.</p>
-                <div class="stack-chips">
-                    <span class="chip">Python</span>
-                    <span class="chip">Analytics</span>
-                    <span class="chip">Supply Chain</span>
-                    <span class="chip">Optimization</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/Fintech-Postgres-to-Snowflake-Migration', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/Fintech-Postgres-to-Snowflake-Migration" target="_blank" rel="noopener">FinTech OLTP to Snowflake Analytics Migration</a></h3>
-                <p class="project-description">Designed and executed an end-to-end data migration from a PostgreSQL OLTP system to a Snowflake analytics warehouse. Implemented ELT pipelines and star schema modeling to enable scalable reporting and downstream analytical workloads in a fintech context.</p>
-                <div class="stack-chips">
-                    <span class="chip">PostgreSQL</span>
-                    <span class="chip">Snowflake</span>
-                    <span class="chip">ELT</span>
-                    <span class="chip">Star Schema</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/ECommerce-Lakehouse-Databricks', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/ECommerce-Lakehouse-Databricks" target="_blank" rel="noopener">E-Commerce Lakehouse on Databricks</a></h3>
-                <p class="project-description">Architected and implemented a Databricks Lakehouse using PySpark and Delta Lake to process raw e-commerce transactions into analytics-ready datasets. Built curated revenue, customer lifetime value, and cohort retention tables following Bronze–Silver–Gold design principles.</p>
-                <div class="stack-chips">
-                    <span class="chip">Databricks</span>
-                    <span class="chip">PySpark</span>
-                    <span class="chip">Delta Lake</span>
-                    <span class="chip">Lakehouse</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/NYC-311-SQL-CICD', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/NYC-311-SQL-CICD" target="_blank" rel="noopener">NYC 311 Analytics CI/CD Framework</a></h3>
-                <p class="project-description">Built a production-grade SQL analytics workflow with automated CI/CD to validate analytical queries against PostgreSQL on every code change. Implemented SQL linting, database-backed smoke tests, and schema validation to ensure correctness, consistency, and deployment readiness of analytics logic.</p>
-                <div class="stack-chips">
-                    <span class="chip">SQL</span>
-                    <span class="chip">CI/CD</span>
-                    <span class="chip">PostgreSQL</span>
-                    <span class="chip">GitHub Actions</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/IMDb-Data-Analysis-Python-Tableau', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/IMDb-Data-Analysis-Python-Tableau" target="_blank" rel="noopener">IMDb Analytics & Visualization Dashboard</a></h3>
-                <p class="project-description">Performed end-to-end data analysis on IMDb datasets using Python, covering preprocessing, EDA, time-series analysis, and predictive modeling. Delivered interactive dashboards in Tableau to visualize trends, ratings, and content performance insights.</p>
-                <div class="stack-chips">
-                    <span class="chip">Python</span>
-                    <span class="chip">Tableau</span>
-                    <span class="chip">EDA</span>
-                    <span class="chip">Visualization</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/Medical-Cost-Analysis-Machine-Learning', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/Medical-Cost-Analysis-Machine-Learning" target="_blank" rel="noopener">Medical Insurance Cost Prediction System</a></h3>
-                <p class="project-description">Developed a machine learning pipeline to predict medical insurance costs using multiple regression models. Applied data preprocessing, feature scaling, hyperparameter tuning, and rigorous model evaluation to improve predictive accuracy and robustness.</p>
-                <div class="stack-chips">
-                    <span class="chip">Python</span>
-                    <span class="chip">scikit-learn</span>
-                    <span class="chip">Regression</span>
-                    <span class="chip">ML Pipeline</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/YELP-Sentiment-Analyzer-Recommender', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/YELP-Sentiment-Analyzer-Recommender" target="_blank" rel="noopener">Yelp Sentiment-Driven Recommendation Engine</a></h3>
-                <p class="project-description">Built a hybrid recommendation system combining KNN, SVD, and neural networks on the Yelp dataset. Performed sentiment analysis on customer reviews to enrich recommendations and improve relevance and personalization.</p>
-                <div class="stack-chips">
-                    <span class="chip">Python</span>
-                    <span class="chip">NLP</span>
-                    <span class="chip">Recommender Systems</span>
-                    <span class="chip">Deep Learning</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
-
-            <div class="project-card" onclick="window.open('https://github.com/medhavipande18/Database-Design-for-Property-Vendor-Management-System', '_blank')">
-                <h3><a href="https://github.com/medhavipande18/Database-Design-for-Property-Vendor-Management-System" target="_blank" rel="noopener">Property & Vendor Management Database Architecture</a></h3>
-                <p class="project-description">Designed and implemented a normalized database for a property and vendor management system, translating EER/UML models into MySQL schemas. Extended the design to MongoDB for flexible data handling and used Python-based visualizations for exploratory analysis.</p>
-                <div class="stack-chips">
-                    <span class="chip">MySQL</span>
-                    <span class="chip">MongoDB</span>
-                    <span class="chip">Database Design</span>
-                    <span class="chip">Python</span>
-                </div>
-                <span class="view-repo">View repository →</span>
-            </div>
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/LogiStream-SupplyChain-DW','_blank')">
+          <span class="impact-tag">Retention Strategy</span>
+          <h3><a href="https://github.com/medhavipande18/LogiStream-SupplyChain-DW" target="_blank">LogiStream: Data Pipeline & Warehouse Integration</a></h3>
+          <p class="project-desc">Designed a data warehousing pipeline integrating operational data for churn analytics, applying supervised ML with Top-K targeting.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">ML</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/LogiStream-SupplyChain-DW" target="_blank">View repository →</a>
         </div>
-    </section>
 
-    <section id="experience">
-        <div class="section-header">
-            <h2 class="section-title">Journey</h2>
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/SpeakingBot-MLOps','_blank')">
+          <span class="impact-tag">AI Product Infrastructure</span>
+          <h3><a href="https://github.com/medhavipande18/SpeakingBot-MLOps" target="_blank">Speaking Bot: MLOps-Driven RAG System</a></h3>
+          <p class="project-desc">Production-grade MLOps pipeline for an LLM-based RAG system, with Airflow ingestion, Docker/CI-CD deployment, and MLflow on GCP.</p>
+          <div class="chips"><span class="chip">MLOps</span><span class="chip">Airflow</span><span class="chip">GCP</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/SpeakingBot-MLOps" target="_blank">View repository →</a>
         </div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content-wrapper">
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <img src="logos/dell.jpg" alt="DELL" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="timeline-info">
-                            <div class="timeline-date">Sep 2025 – Present</div>
-                            <div class="timeline-title">Senior Data Engineer</div>
-                            <div class="timeline-company">Dell Technologies, Hopkinton, MA</div>
-                            <div class="timeline-description">Built scalable ELT pipelines with dbt and Snowflake, engineered real-time data streaming with Kafka and Spark, and deployed containerized workloads using Docker and Kubernetes with CI/CD automation.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="timeline-item">
-                <div class="timeline-content-wrapper">
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <img src="logos/northeastern.jpg" alt="NEU" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="timeline-info">
-                            <div class="timeline-date">Sep 2023 – Dec 2025</div>
-                            <div class="timeline-title">Master of Science in Data Analytics Engineering</div>
-                            <div class="timeline-company">Northeastern University, Boston, MA</div>
-                            <div class="timeline-coursework"><strong>Relevant Coursework:</strong> Data Warehousing & Integration, Machine Learning Operations, Cloud Computing, Engineering Project Management, Data Mining in Engineering, Database Management for Analytics, Computation & Visualization in Analytics, Foundations of Data Analytics</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content-wrapper">
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <img src="logos/dell.jpg" alt="DELL" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="timeline-info">
-                            <div class="timeline-date">Jun 2024 – Dec 2024</div>
-                            <div class="timeline-title">Business Intelligence & Data Engineer</div>
-                            <div class="timeline-company">Dell Technologies, Hopkinton, MA</div>
-                            <div class="timeline-description">Developed API-based data ingestion pipelines, built batch processing workflows with Python and SQL, and orchestrated Airflow DAGs for reliable data pipeline execution.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content-wrapper">
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <img src="logos/yardi.jpg" alt="YARDI" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="timeline-info">
-                            <div class="timeline-date">Jul 2021 – Jul 2023</div>
-                            <div class="timeline-title">Senior Data Engineer</div>
-                            <div class="timeline-company">Yardi Systems, Pune, India</div>
-                            <div class="timeline-description">Built ETL/ELT pipelines using Spark and AWS Glue, designed dimensional data models in Redshift and SQL Server, and orchestrated Airflow workflows for reliable data processing.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content-wrapper">
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <img src="logos/lotus.jpg" alt="LOTUS" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="timeline-info">
-                            <div class="timeline-date">Jun 2020 – Jun 2021</div>
-                            <div class="timeline-title">Junior Data Engineer</div>
-                            <div class="timeline-company">Lotus Surgical Bandages, Aurangabad, India</div>
-                            <div class="timeline-description">Built ETL pipelines with Python and SQL, automated batch workflows using Airflow, and developed PostgreSQL data warehouse with Tableau dashboards.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content-wrapper">
-                    <div class="timeline-content">
-                        <div class="timeline-icon">
-                            <img src="logos/pict.jpg" alt="PICT" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="timeline-info">
-                            <div class="timeline-date">Aug 2017 – Jun 2021</div>
-                            <div class="timeline-title">Bachelor of Engineering</div>
-                            <div class="timeline-company">Pune Institute of Computer Technology, Pune, India</div>
-                            <div class="timeline-coursework"><strong>Relevant Coursework:</strong> Data Structures and Algorithms, Object Oriented Programming, System Programming and Operating Systems, Internet of Things, Computer Networks and Security, Machine Learning, Artificial Intelligence, Business Management</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/SaaS-Churn-Intelligence','_blank')">
+          <span class="impact-tag">Customer Retention</span>
+          <h3><a href="https://github.com/medhavipande18/SaaS-Churn-Intelligence" target="_blank">SaaS Churn Intelligence Platform</a></h3>
+          <p class="project-desc">End-to-end churn prediction system using leakage-safe weekly snapshots and business-aligned Top-K evaluation.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">ML</span><span class="chip">Feature Eng.</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/SaaS-Churn-Intelligence" target="_blank">View repository →</a>
         </div>
-    </section>
 
-    <section id="education">
-    </section>
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/Sales-Supply-Chain-Analytics','_blank')">
+          <span class="impact-tag">Operations Strategy</span>
+          <h3><a href="https://github.com/medhavipande18/Sales-Supply-Chain-Analytics" target="_blank">Sales & Supply Chain Analytics Suite</a></h3>
+          <p class="project-desc">Descriptive, diagnostic, predictive, and prescriptive analytics supporting demand planning and inventory optimization.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">Analytics</span><span class="chip">Optimization</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/Sales-Supply-Chain-Analytics" target="_blank">View repository →</a>
+        </div>
 
-    <section id="technologies">
-        <div class="section-header">
-            <h2 class="section-title">Technologies</h2>
-            <p class="section-subtitle">Tools and platforms used across the projects shown above.</p>
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/Fintech-Postgres-to-Snowflake-Migration','_blank')">
+          <span class="impact-tag">Fintech Modernization</span>
+          <h3><a href="https://github.com/medhavipande18/Fintech-Postgres-to-Snowflake-Migration" target="_blank">FinTech OLTP → Snowflake Migration</a></h3>
+          <p class="project-desc">End-to-end migration from PostgreSQL OLTP to Snowflake with ELT pipelines and star-schema modeling.</p>
+          <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">Snowflake</span><span class="chip">ELT</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/Fintech-Postgres-to-Snowflake-Migration" target="_blank">View repository →</a>
+        </div>
+
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/ECommerce-Lakehouse-Databricks','_blank')">
+          <span class="impact-tag">Revenue Analytics</span>
+          <h3><a href="https://github.com/medhavipande18/ECommerce-Lakehouse-Databricks" target="_blank">E-Commerce Lakehouse on Databricks</a></h3>
+          <p class="project-desc">Databricks Lakehouse using PySpark and Delta Lake, curating revenue, CLV, and cohort tables via Bronze-Silver-Gold design.</p>
+          <div class="chips"><span class="chip">Databricks</span><span class="chip">PySpark</span><span class="chip">Delta Lake</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/ECommerce-Lakehouse-Databricks" target="_blank">View repository →</a>
+        </div>
+
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/NYC-311-SQL-CICD','_blank')">
+          <span class="impact-tag">Reliability & Governance</span>
+          <h3><a href="https://github.com/medhavipande18/NYC-311-SQL-CICD" target="_blank">NYC 311 Analytics CI/CD Framework</a></h3>
+          <p class="project-desc">Production-grade SQL analytics workflow with automated CI/CD validation, linting, and schema checks.</p>
+          <div class="chips"><span class="chip">SQL</span><span class="chip">CI/CD</span><span class="chip">PostgreSQL</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/NYC-311-SQL-CICD" target="_blank">View repository →</a>
+        </div>
+
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/IMDb-Data-Analysis-Python-Tableau','_blank')">
+          <span class="impact-tag">Content Strategy Insight</span>
+          <h3><a href="https://github.com/medhavipande18/IMDb-Data-Analysis-Python-Tableau" target="_blank">IMDb Analytics & Visualization Dashboard</a></h3>
+          <p class="project-desc">End-to-end EDA, time-series, and predictive modeling with interactive Tableau dashboards.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">Tableau</span><span class="chip">EDA</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/IMDb-Data-Analysis-Python-Tableau" target="_blank">View repository →</a>
+        </div>
+
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/Medical-Cost-Analysis-Machine-Learning','_blank')">
+          <span class="impact-tag">Risk Forecasting</span>
+          <h3><a href="https://github.com/medhavipande18/Medical-Cost-Analysis-Machine-Learning" target="_blank">Medical Insurance Cost Prediction System</a></h3>
+          <p class="project-desc">ML pipeline predicting medical insurance costs via multiple regression models with tuned hyperparameters.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">Regression</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/Medical-Cost-Analysis-Machine-Learning" target="_blank">View repository →</a>
+        </div>
+
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/YELP-Sentiment-Analyzer-Recommender','_blank')">
+          <span class="impact-tag">Personalization</span>
+          <h3><a href="https://github.com/medhavipande18/YELP-Sentiment-Analyzer-Recommender" target="_blank">Yelp Sentiment-Driven Recommendation Engine</a></h3>
+          <p class="project-desc">Hybrid recommender combining KNN, SVD, and neural networks enriched with review sentiment analysis.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">NLP</span><span class="chip">Deep Learning</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/YELP-Sentiment-Analyzer-Recommender" target="_blank">View repository →</a>
+        </div>
+
+        <div class="project-card" onclick="window.open('https://github.com/medhavipande18/Database-Design-for-Property-Vendor-Management-System','_blank')">
+          <span class="impact-tag">Systems Design</span>
+          <h3><a href="https://github.com/medhavipande18/Database-Design-for-Property-Vendor-Management-System" target="_blank">Property & Vendor Management DB Architecture</a></h3>
+          <p class="project-desc">Normalized MySQL database from EER/UML models, extended to MongoDB with Python-based exploratory visualizations.</p>
+          <div class="chips"><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Design</span></div>
+          <a class="view-repo" href="https://github.com/medhavipande18/Database-Design-for-Property-Vendor-Management-System" target="_blank">View repository →</a>
         </div>
         </div>
-        <div class="tech-grid">
-            <div class="tech-item">
-                <div class="tech-icon">🐍</div>
-                <div class="tech-name">Python</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">⚡</div>
-                <div class="tech-name">PySpark</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🔥</div>
-                <div class="tech-name">Apache Kafka</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🐘</div>
-                <div class="tech-name">Hadoop</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🐬</div>
-                <div class="tech-name">MySQL</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">💾</div>
-                <div class="tech-name">SQL Server</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🐘</div>
-                <div class="tech-name">PostgreSQL</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🔴</div>
-                <div class="tech-name">Oracle</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🍃</div>
-                <div class="tech-name">MongoDB</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">❄️</div>
-                <div class="tech-name">Snowflake</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🧱</div>
-                <div class="tech-name">Databricks</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">☁️</div>
-                <div class="tech-name">AWS</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🔵</div>
-                <div class="tech-name">GCP</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🌀</div>
-                <div class="tech-name">Azure</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🐳</div>
-                <div class="tech-name">Docker</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">☸️</div>
-                <div class="tech-name">Kubernetes</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🌊</div>
-                <div class="tech-name">Airflow</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🔧</div>
-                <div class="tech-name">dbt</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">🏗️</div>
-                <div class="tech-name">Terraform</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">✅</div>
-                <div class="tech-name">Great Expectations</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">📊</div>
-                <div class="tech-name">Tableau</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">📈</div>
-                <div class="tech-name">Power BI</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">👁️</div>
-                <div class="tech-name">Looker</div>
-            </div>
-            <div class="tech-item">
-                <div class="tech-icon">📉</div>
-                <div class="tech-name">QuickSight</div>
-            </div>
-        </div>
-    </section>
+      </section>
 
-    <section id="contact">
-        <div class="section-header">
-            <h2 class="section-title">Get in Touch</h2>
+      <section id="technologies">
+        <div class="section-header"><h2 class="section-title">Tools & Technologies</h2></div>
+        <div class="tech-flow">
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/python/3776AB" alt=""><div class="tname">Python</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/apachespark/E25A1C" alt=""><div class="tname">PySpark</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/apachekafka/231F20" alt=""><div class="tname">Kafka</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/apachehadoop/66CCFF" alt=""><div class="tname">Hadoop</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt=""><div class="tname">MySQL</div></div>
+          <div class="tech-item"><img src="logos/mssqlserver.png" alt=""><div class="tname">SQL Server</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt=""><div class="tname">PostgreSQL</div></div>
+          <div class="tech-item"><img src="logos/oracledb.png" alt=""><div class="tname">Oracle</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt=""><div class="tname">MongoDB</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/snowflake/29B5E8" alt=""><div class="tname">Snowflake</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/databricks/FF3621" alt=""><div class="tname">Databricks</div></div>
+          <div class="tech-item"><img src="logos/aws.png" alt=""><div class="tname">AWS</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/googlecloud/4285F4" alt=""><div class="tname">GCP</div></div>
+          <div class="tech-item"><img src="logos/azure.png" alt=""><div class="tname">Azure</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/docker/2496ED" alt=""><div class="tname">Docker</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/kubernetes/326CE5" alt=""><div class="tname">Kubernetes</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/apacheairflow/017CEE" alt=""><div class="tname">Airflow</div></div>
+          <div class="tech-item"><img src="logos/dbt.jpg" alt=""><div class="tname">dbt</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/terraform/7B42BC" alt=""><div class="tname">Terraform</div></div>
+          <div class="tech-item"><img src="logos/tableau.png" alt=""><div class="tname">Tableau</div></div>
+          <div class="tech-item"><img src="logos/powerbi.png" alt=""><div class="tname">Power BI</div></div>
+          <div class="tech-item"><img src="https://cdn.simpleicons.org/looker/4285F4" alt=""><div class="tname">Looker</div></div>
+          <div class="tech-item"><img src="logos/aws-quicksight.png" alt=""><div class="tname">QuickSight</div></div>
         </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-header"><h2 class="section-title">Let's build something</h2><p class="section-sub">Open to data engineering, AI strategy, and BI leadership conversations.</p></div>
         <div class="links-grid">
-            <a href="https://github.com/medhavipande18" class="link-card" target="_blank" rel="noopener">
-                <div style="font-size: 32px; margin-bottom: 12px;">💻</div>
-                <h3>GitHub</h3>
-                <p>medhavipande18</p>
-            </a>
-            <a href="https://www.linkedin.com/in/medhavipande18/" class="link-card" target="_blank" rel="noopener">
-                <div style="font-size: 32px; margin-bottom: 12px;">💼</div>
-                <h3>LinkedIn</h3>
-                <p>medhavipande18</p>
-            </a>
-            <a href="https://leetcode.com/u/medhavipande/" class="link-card" target="_blank" rel="noopener">
-                <div style="font-size: 32px; margin-bottom: 12px;">⚡</div>
-                <h3>LeetCode</h3>
-                <p>medhavipande</p>
-            </a>
-            <a href="mailto:medhavipande9@gmail.com" class="link-card">
-                <div style="font-size: 32px; margin-bottom: 12px;">✉️</div>
-                <h3>Email</h3>
-                <p>medhavipande9@gmail.com</p>
-            </a>
+          <a class="link-card" href="mailto:medhavipande9@gmail.com"><div class="icon-tile" style="background:#ea4335;">✉️</div><div><h4>Email</h4><p>medhavipande9@gmail.com</p></div></a>
+          <a class="link-card" href="https://www.linkedin.com/in/medhavipande18/" target="_blank"><div class="icon-tile" style="background:#0A66C2;"><img src="logos/linkedin.png" alt=""></div><div><h4>LinkedIn</h4><p>medhavipande18</p></div></a>
+          <a class="link-card" href="https://github.com/medhavipande18" target="_blank"><div class="icon-tile" style="background:#161b22;"><img src="https://cdn.simpleicons.org/github/ffffff" alt=""></div><div><h4>GitHub</h4><p>medhavipande18</p></div></a>
+          <a class="link-card" href="https://leetcode.com/u/medhavipande/" target="_blank"><div class="icon-tile" style="background:#FFA116;"><img src="https://cdn.simpleicons.org/leetcode/ffffff" alt=""></div><div><h4>LeetCode</h4><p>medhavipande</p></div></a>
         </div>
-    </section>
+      </section>
 
-    <footer>
-        <div class="footer-content">
-            <p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary);">© 2025 Medhavi Pande</p>
-        </div>
-    </footer>
+      <div class="footer-text">© 2025 Medhavi Pande</div>
 
-    <script>
-        // Smooth scroll active state
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-links a');
+    </div>
+  </div>
+</div>
 
-        function setActiveLink() {
-            let current = '';
-            const scrollY = window.pageYOffset;
+<div class="dock-wrap">
+  <div class="dock" id="dock">
+    <div class="dock-item" data-section="about" style="background:#007aff;"><img src="https://unpkg.com/lucide-static/icons/user-round.svg" alt=""><span class="dock-tooltip">About</span><span class="dock-dot"></span></div>
+    <div class="dock-item" data-section="certifications" style="background:#5856d6;"><img src="https://unpkg.com/lucide-static/icons/award.svg" alt=""><span class="dock-tooltip">Licenses</span><span class="dock-dot"></span></div>
+    <div class="dock-item" data-section="research" style="background:#ff2d55;"><img src="https://unpkg.com/lucide-static/icons/search.svg" alt=""><span class="dock-tooltip">Technical Research</span><span class="dock-dot"></span></div>
+    <div class="dock-item" data-section="coding" style="background:#00c7be;"><img src="https://unpkg.com/lucide-static/icons/laptop.svg" alt=""><span class="dock-tooltip">Coding Accomplishments</span><span class="dock-dot"></span></div>
+    <div class="dock-item" data-section="journey" style="background:#ff9500;"><img src="https://unpkg.com/lucide-static/icons/briefcase.svg" alt=""><span class="dock-tooltip">Work Experience</span><span class="dock-dot"></span></div>
+    <div class="dock-item" data-section="education" style="background:#5ac8fa;"><img src="https://unpkg.com/lucide-static/icons/graduation-cap.svg" alt=""><span class="dock-tooltip">Education</span><span class="dock-dot"></span></div>
+    <div class="dock-item" data-section="courses" style="background:#af52de;"><img src="https://unpkg.com/lucide-static/icons/scroll-text.svg" alt=""><span class="dock-tooltip">Certifications</span><span class="dock-dot"></span></div>
+    <div class="dock-item" data-section="projects" style="background:#34c759;"><img src="https://unpkg.com/lucide-static/icons/bar-chart-3.svg" alt=""><span class="dock-tooltip">Projects</span><span class="dock-dot"></span></div>
+    <div class="dock-item" data-section="technologies" style="background:#8e8e93;"><img src="https://unpkg.com/lucide-static/icons/settings.svg" alt=""><span class="dock-tooltip">Tools & Technologies</span><span class="dock-dot"></span></div>
+    <div class="dock-item" data-section="contact" style="background:#ff3b30;"><img src="https://unpkg.com/lucide-static/icons/mail.svg" alt=""><span class="dock-tooltip">Contact</span><span class="dock-dot"></span></div>
+  </div>
+</div>
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.offsetHeight;
-                const sectionId = section.getAttribute('id');
-                
-                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                    current = sectionId;
-                }
-            });
+<script>
+// Live clock
+function updateClock(){
+  const now = new Date();
+  let h = now.getHours(); const m = now.getMinutes().toString().padStart(2,'0');
+  const ampm = h >= 12 ? 'PM' : 'AM'; h = h % 12; h = h ? h : 12;
+  document.getElementById('clock').textContent = `${h}:${m} ${ampm}`;
+}
+updateClock(); setInterval(updateClock, 1000);
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
+// Count-up animation for hero numbers
+const countEls = document.querySelectorAll('.num[data-count]');
+let countedOnce = false;
+function runCountUp(){
+  if(countedOnce) return;
+  countedOnce = true;
+  countEls.forEach(el=>{
+    const target = parseInt(el.getAttribute('data-count'));
+    const suffix = el.getAttribute('data-suffix') || '';
+    let current = 0;
+    const duration = 900;
+    const start = performance.now();
+    function step(now){
+      const progress = Math.min((now-start)/duration, 1);
+      current = Math.floor(progress * target);
+      el.textContent = current + suffix;
+      if(progress < 1) requestAnimationFrame(step);
+      else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(step);
+  });
+}
+const heroObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{ if(entry.isIntersecting) runCountUp(); });
+}, {threshold:0.4});
+const numbersStrip = document.querySelector('.numbers-strip');
+if(numbersStrip) heroObserver.observe(numbersStrip);
 
-        window.addEventListener('scroll', setActiveLink);
-        window.addEventListener('load', setActiveLink);
-    </script>
+// Mouse parallax on background orbs
+document.addEventListener('mousemove', (e)=>{
+  const x = (e.clientX / window.innerWidth - 0.5) * 30;
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  document.querySelector('.orb1').style.marginLeft = (x * 1.2) + 'px';
+  document.querySelector('.orb1').style.marginTop = (y * 1.2) + 'px';
+  document.querySelector('.orb2').style.marginLeft = (-x * 0.8) + 'px';
+  document.querySelector('.orb2').style.marginTop = (-y * 0.8) + 'px';
+  document.querySelector('.orb3').style.marginLeft = (x * 1.5) + 'px';
+  document.querySelector('.orb3').style.marginTop = (-y * 1.5) + 'px';
+});
+document.querySelectorAll('.dock-item').forEach(item=>{
+  item.addEventListener('click', ()=>{
+    const id = item.getAttribute('data-section');
+    const target = document.getElementById(id);
+    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    item.classList.remove('bounce'); void item.offsetWidth; item.classList.add('bounce');
+  });
+});
+
+// Scroll fade-in for sections
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ entry.target.classList.add('in-view'); }
+  });
+}, {threshold:0.12});
+document.querySelectorAll('section').forEach(s=>observer.observe(s));
+
+// Active dock indicator on scroll
+const sections = document.querySelectorAll('section[id]');
+const dockItems = document.querySelectorAll('.dock-item');
+function setActiveDock(){
+  let current = 'about';
+  sections.forEach(s=>{
+    const top = s.getBoundingClientRect().top + window.scrollY - 150;
+    if(window.scrollY >= top) current = s.getAttribute('id');
+  });
+  dockItems.forEach(item=>{
+    item.classList.remove('active');
+    if(item.getAttribute('data-section') === current) item.classList.add('active');
+  });
+}
+window.addEventListener('scroll', setActiveDock);
+window.addEventListener('load', setActiveDock);
+</script>
 </body>
 </html>
